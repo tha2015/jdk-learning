@@ -32,6 +32,22 @@ This project uses wrapper scripts to work with a personal GitHub account (tha201
 - Uses custom config directory: `~/.config/gh-tha2015`
 - Keeps personal GitHub CLI authentication separate from work account
 
+## Environment Details
+
+**Working Directory**: `Project root directory`
+
+**Platform**: macOS (Darwin)
+
+**Java Development**:
+- Uses Docker with Amazon Corretto 21 image
+- No local JDK installation required
+- Compilation and execution happen inside Docker container
+- Docker command mounts current directory as `/app` inside container
+
+**Makefile Targets**:
+- `make run` (or just `make`): Compiles Main.java and runs it in Docker
+- `make ide`: Opens project in Pulsar editor
+
 ## Project Structure
 
 ```
