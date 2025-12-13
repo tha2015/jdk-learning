@@ -19,13 +19,15 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  # Single deploy job since we're just deploying
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
@@ -36,27 +38,11 @@ jobs:
       - name: Build with Maven
         run: ./mvnw clean package -B
 
-      - name: Verify TeaVM output
-        run: |
-          echo "Checking TeaVM output directory..."
-          ls -la target/generated/js/
-          echo "Contents of index.html:"
-          head -20 target/generated/js/index.html
-
-      - name: Upload Pages artifact
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
+          # Upload html and js files
           path: target/generated/js
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
