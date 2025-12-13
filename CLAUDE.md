@@ -34,7 +34,7 @@ This project uses wrapper scripts to work with a personal GitHub account (tha201
 
 ## Environment Details
 
-**Working Directory**: `Project root directory`
+**Working Directory**: Project root directory
 
 **Platform**: macOS (Darwin)
 
