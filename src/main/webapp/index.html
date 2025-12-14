@@ -3,28 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>TeaVM Demo</title>
-    <style>
-        body { font-family: sans-serif; padding: 20px; }
-        #output { padding: 10px; margin: 10px 0; background: #f0f0f0; }
-        input { padding: 5px; margin-right: 10px; }
-        button { padding: 5px 15px; }
-    </style>
 </head>
 <body>
-    <h1>Java to JavaScript Demo</h1>
-
-    <input type="text" id="userInput" value="hello">
-    <button onclick="callJava()">toUpperCase</button>
-
+    <input type="text" id="input" value="hello">
+    <button onclick="document.getElementById('output').textContent = toUpperCaseJava(document.getElementById('input').value)">toUpperCase</button>
     <div id="output"></div>
-
     <script src="classes.js"></script>
-    <script>
-        function callJava() {
-            const input = document.getElementById('userInput').value;
-            const result = toUpperCaseJava(input);
-            document.getElementById('output').textContent = 'Input: "' + input + '" → Output: "' + result + '"';
-        }
-    </script>
 </body>
 </html>
