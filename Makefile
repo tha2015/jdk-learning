@@ -36,18 +36,18 @@ pages: package
 
 ## docker-run: Run using Docker (fallback method)
 docker-run:
-	docker run --rm -v "$(shell pwd):/app" -w /app amazoncorretto:21 \
-		sh -c "javac -d out src/main/java/com/tha2015/jdklearning/Main.java && java -cp out com.tha2015.jdklearning.Main"
+	docker run --rm -v "$$HOME/.m2":/root/.m2 -v "$(shell pwd):/app" -w /app amazoncorretto:21 \
+		./mvnw compile exec:java
 
 ## docker-test: Run tests using Docker (fallback method)
 docker-test:
-	docker run --rm -v "$(shell pwd):/app" -w /app maven:3.9-amazoncorretto-21 \
-		mvn test
+	docker run --rm -v "$$HOME/.m2":/root/.m2 -v "$(shell pwd):/app" -w /app amazoncorretto:21 \
+		./mvnw test
 
 ## docker-package: Build package using Docker (fallback method)
 docker-package:
-	docker run --rm -v "$(shell pwd):/app" -w /app maven:3.9-amazoncorretto-21 \
-		mvn clean package
+	docker run --rm -v "$$HOME/.m2":/root/.m2 -v "$(shell pwd):/app" -w /app amazoncorretto:21 \
+		./mvnw clean package
 
 ## ide: Open project in Pulsar editor
 ide:
@@ -55,5 +55,5 @@ ide:
 
 ## setup: Bootstrap Maven Wrapper (run once)
 setup:
-	docker run --rm -v "$(shell pwd):/app" -w /app maven:3.9-amazoncorretto-21 \
+	docker run --rm -v "$$HOME/.m2":/root/.m2 -v "$(shell pwd):/app" -w /app maven:3.9-amazoncorretto-21 \
 		mvn wrapper:wrapper
