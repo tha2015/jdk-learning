@@ -13,6 +13,10 @@ help:
 run:
 	./mvnw compile exec:java
 
+## run-args: Run with custom arguments (usage: make run-args ARGS="arg1 arg2")
+run-args:
+	./mvnw compile exec:java -Dexec.args="$(ARGS)"
+
 ## test: Run JUnit tests
 test:
 	./mvnw test
@@ -51,7 +55,7 @@ docker-package:
 
 ## ide: Open project in Pulsar editor
 ide:
-	pulsar .
+	code .
 
 ## setup: Bootstrap Maven Wrapper (run once)
 setup:
